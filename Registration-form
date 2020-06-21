@@ -1,0 +1,56 @@
+import tkinter as tk
+import tkinter.ttk as ttk
+import panda as pd
+from openpyxl import *
+from tkinter.messagebox import showinfo
+
+win = tk.Tk()
+win.title("Registration form")
+win.minsize(400,400)
+
+def save():
+  First_name = entry1.get()
+  Last_name = entry2.get()
+  age = entry3.get()
+
+  wb = Workbook()
+  ws = wb.active
+
+  ws['A1'] = 'First Name'
+  ws['B1'] = 'Last Name'
+  ws['C1'] = 'Age'
+  ws['A2'] = First_name
+  ws['B1'] = Last_name
+  ws['C1'] = age
+
+  wb.save(r'C:\User\username\Desktop\reg.xlsx')
+  showinfo("Saved","Your entry has been saved!")
+
+def clear():
+  entry1.delete(0, tk.END)
+  entry2.delete(0, tk.END)
+  entry3.delete(0, tk.END)
+
+label = tk.Label(win,text = "Name of Reg form")
+label.grid(row=0, column=0, padx=8, pady=8)
+
+label1 = tk.Label(win,text = "First Name: ")
+label1.grid(row=1, column=0, padx=8, pady=8)
+entry1 = tk.Entry(win)
+entry1.grid(row=1, column=1, padx=8, pady=8)
+
+label2 = tk.Label(win,text = "Last Name: ")
+label2.grid(row=2, column=0, padx=8, pady=8)
+entry2 = tk.Entry(win)
+entry2.grid(row=2, column=1, padx=8, pady=8)
+
+label3 = tk.Label(win,text = "Age: ")
+label3.grid(row=3, column=0, padx=8, pady=8)
+entry3 = tk.Entry(win)
+entry3.grid(row=3, column=1, padx=8, pady=8)
+
+button = ttk.Button(win,text = "Register",command = save)
+button.grid(row=4, column=0, padx=8, pady=8)
+
+button1 = ttk.Button(win,text = "Close",command = clear)
+button1.grid(row=5, column=0, padx=8, pady=8)
